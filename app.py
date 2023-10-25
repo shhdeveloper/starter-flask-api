@@ -11,9 +11,8 @@ def hello_world():
     # Add string data to the list
     my_list.append("String 1")
 
-    # Print the list
-    print(my_list)
-    return my_list
+    # Return the list as a JSON response
+    return jsonify(my_list)
 
 @app.route('/')
 def list():
