@@ -1,17 +1,8 @@
-import asyncio
-from flask import Flask, jsonify, render_template, request
-import os
-import subprocess
-from ping3 import ping, verbose_ping
-
-# Define the host or IP address you want to ping
-
-
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
 my_list = []  # Initialize a list to store data
-
 
 @app.route('/add_data', methods=['POST'])
 def add_data():
@@ -30,5 +21,3 @@ def get_data():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-
-    
