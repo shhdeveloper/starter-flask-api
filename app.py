@@ -1,20 +1,20 @@
-from flask import Flask
+from flask import Flask, jsonify
 import os
 
 app = Flask(__name__)
 
 @app.route('/')
+
 def hello_world():
-    # Create an empty list
-    my_list = []
+    # Create an example list
+    my_list = ["String 1", "String 2", "String 3"]
 
-    # Add string data to the list
-    my_list.append("String 1")
+    # Return the list as a JSON response
+    return jsonify(my_list)
 
-    # Print the list in the server logs
-    print(my_list)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
 
-    return "List printed in the server logs"
 
 @app.route('/')
 def list():
