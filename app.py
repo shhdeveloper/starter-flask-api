@@ -12,26 +12,24 @@ my_list = []  # Initialize a list to store data
 
 @app.route('/add_data', methods=['POST'])
 def add_data():
-
     host = "dark-pink-indri-yoke.cyclic.app"  # Change this to the desired host
 
-# Run the ping command and capture the output
+    # Run the ping command and capture the output
     try:
         result = subprocess.check_output(["ping", "-c", "1", host])
         result = result.decode("utf-8")  # Decode the binary output to a string
         print(result)
     except subprocess.CalledProcessError:
-        print("Ping failed. The host may be unreachable.")
+        result = "Ping failed. The host may be unreachable."
 
     data = request.get_json()  # Assuming you send JSON data in the request
 
     if 'data' in data:
         new_data = data['data']
-        my_list.append(new_data)
-        return jsonify({"message": "Data added successfully" + result})
+        my_list.append({"data": new_data, "ping_result": result})
+        return jsonify({"message": "Data added successfully", "ping_result": result})
     else:
-        return jsonify({"error": "Invalid data format"}), 400 
-    
+        return jsonify({"error": "Invalid data format"}), 400
 
 @app.route('/get_data', methods=['GET'])
 def get_data():
