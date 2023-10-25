@@ -19,17 +19,18 @@ def add_data():
         result = subprocess.check_output(["ping", "-c", "1", host])
         result = result.decode("utf-8")  # Decode the binary output to a string
         print(result)
+        data = request.get_json()  # Assuming you send JSON data in the request
+
+        if 'data' in data:
+            new_data = data['data']
+            my_list.append({"data": new_data, "ping_result": result})
+            return jsonify({"message": "Data added successfully", "ping_result": result})
+        else:
+            return jsonify({"error": "Invalid data format"}), 400
     except subprocess.CalledProcessError:
         result = "Ping failed. The host may be unreachable."
 
-    data = request.get_json()  # Assuming you send JSON data in the request
-
-    if 'data' in data:
-        new_data = data['data']
-        my_list.append({"data": new_data, "ping_result": result})
-        return jsonify({"message": "Data added successfully", "ping_result": result})
-    else:
-        return jsonify({"error": "Invalid data format"}), 400
+   
 
 @app.route('/get_data', methods=['GET'])
 def get_data():
