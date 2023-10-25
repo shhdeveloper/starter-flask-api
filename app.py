@@ -31,7 +31,7 @@ def add_data():
         #ping_result = asyncio.run(ping_host(host))
 
         my_list.append({"data": new_data})
-        jsonify({"message": "Data added successfully"})
+        return jsonify({"message": "Data added successfully"})
     else:
         return jsonify({"error": "Invalid data format"}), 400
 
