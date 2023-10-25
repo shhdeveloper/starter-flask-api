@@ -13,19 +13,13 @@ app = Flask(__name__)
 my_list = []  # Initialize a list to store data
 
 
-
 @app.route('/add_data', methods=['POST'])
 def add_data():
-    host = "cyclic.sh"  # Change this to the desired host
     data = request.get_json()  # Assuming you send JSON data in the request
 
     if 'data' in data:
         new_data = data['data']
-
-        # Asynchronously ping the host
-        
-
-        #my_list.append({"data": new_data})
+        my_list.append(new_data)
         return jsonify({"message": "Data added successfully"})
     else:
         return jsonify({"error": "Invalid data format"}), 400
