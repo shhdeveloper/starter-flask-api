@@ -1,19 +1,16 @@
 from flask import Flask, render_template, request, jsonify
 
-app = Flask(__name__)
+import requests
 
-my_list = []  # Initialize a list to store data
+url = "https://dark-pink-indri-yoke.cyclic.app/add"
 
-@app.route('/')
-def index():
-    # Render the HTML template
-    return render_template('index.html', my_list=my_list)
+response = requests.get(url)
 
-@app.route('/add', methods=['POST'])
-def add_data():
-    new_data = request.form.get('data')
-    my_list.append(new_data)
-    return render_template('index.html', my_list=my_list)
+if response.status_code == 200:
+    print("Response from", url, ":", response.text)
+else:
+    print("Failed to retrieve data from", url)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
