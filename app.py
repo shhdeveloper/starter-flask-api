@@ -26,8 +26,8 @@ def add_data():
 
     if 'data' in data:
         new_data = data['data']
-        my_list.append({"data": new_data, "ping_result": result})
-        return jsonify({"message": "Data added successfully", "ping_result": result})
+        # my_list.append({"data": new_data, "ping_result": result})
+        return jsonify({"message": "Data added successfully"})
     else:
         return jsonify({"error": "Invalid data format"}), 400
 
