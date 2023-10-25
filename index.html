@@ -1,31 +1,19 @@
-<script type="text/javascript">
-    $(document).ready(function () {
-        var socket = io.connect('http://your-server-url:5000'); // Replace 'your-server-url' with the actual URL where your server is hosted.
-
-        socket.on('connect', function() {
-            socket.emit('message', { message: 'User connected!', username: '' }); // Send a message with an empty username.
-        });
-
-        socket.on('message', function(data) {
-            var messageText = data.message;
-            var username = data.username; // Get the username from the data
-
-            // Create a list item with the username and message
-            var messageElement = $('<li>').text(username + ': ' + messageText);
-
-            // Append the message to the messages list
-            $('#messages').append(messageElement);
-        });
-
-        $('#send_button').on('click', function () {
-            var username = $('#username').val();
-            var message = $('#message').val();
-
-            // Send the username and message to the server
-            socket.send({ username: username, message: message });
-
-            // Clear the message input
-            $('#message').val('');
-        });
-    });
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask App</title>
+</head>
+<body>
+    <h1>My List:</h1>
+    <ul>
+        {% for item in my_list %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    
+    <form method="post" action="/add_data">
+        <input type="text" name="data" placeholder="Enter data">
+        <input type="submit" value="Add Data">
+    </form>
+</body>
+</html>
