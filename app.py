@@ -18,3 +18,5 @@ def list():
 
     # Print the list
     print(my_list)
+
+    return 'Hello'
