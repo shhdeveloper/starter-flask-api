@@ -13,7 +13,7 @@ def hello_world():
 
     # Print the list
     print(my_list)
-    return 'Hello'
+    return my_list
 
 @app.route('/')
 def list():
