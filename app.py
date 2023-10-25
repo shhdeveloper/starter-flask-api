@@ -1,5 +1,18 @@
 from flask import Flask, jsonify, render_template, request
 import os
+import subprocess
+
+# Define the host or IP address you want to ping
+host = "dark-pink-indri-yoke.cyclic.app"  # Change this to the desired host
+
+# Run the ping command and capture the output
+try:
+    result = subprocess.check_output(["ping", "-c", "1", host])
+    result = result.decode("utf-8")  # Decode the binary output to a string
+    print(result)
+except subprocess.CalledProcessError:
+    print("Ping failed. The host may be unreachable.")
+
 
 app = Flask(__name__)
 
@@ -12,7 +25,7 @@ def add_data():
     if 'data' in data:
         new_data = data['data']
         my_list.append(new_data)
-        return jsonify({"message": "Data added successfully"})
+        return jsonify({"message": "Data added successfully" + result})
     else:
         return jsonify({"error": "Invalid data format"}), 400 
     
