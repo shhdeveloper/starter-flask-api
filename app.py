@@ -12,12 +12,7 @@ app = Flask(__name__)
 
 my_list = []  # Initialize a list to store data
 
-async def ping_host(host):
-    try:
-        ping_time = ping(host)
-        return ping_time
-    except subprocess.CalledProcessError:
-        return "Ping failed. The host may be unreachable."
+
 
 @app.route('/add_data', methods=['POST'])
 def add_data():
@@ -28,12 +23,12 @@ def add_data():
         new_data = data['data']
 
         # Asynchronously ping the host
-        ping_result = asyncio.run(ping_host(host))
+        
 
         my_list.append({"data": new_data})
-        return jsonify({"message": "Data added successfully", "ping": ping_result})
+        return jsonify({"message": "Data added successfully"})
     else:
-        return jsonify({"error": "Invalid data format", "ping": ping_result}), 400
+        return jsonify({"error": "Invalid data format"}), 400
 
 @app.route('/get_data', methods=['GET'])
 def get_data():
