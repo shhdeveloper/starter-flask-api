@@ -1,25 +1,19 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-# Initialize a list to store the data
-my_list = []
+my_list = []  # Initialize a list to store data
 
 @app.route('/')
-def hello_world():
-    # Return the list as a JSON response
-    return jsonify(my_list)
+def index():
+    # Render the HTML template
+    return render_template('index.html', my_list=my_list)
 
 @app.route('/add_data', methods=['POST'])
 def add_data():
-    # Retrieve data from the form
     new_data = request.form.get('data')
-
-    # Append the new data to the list
     my_list.append(new_data)
-
-    # Redirect to the main page or you can return a response
-    return render_template('index.html')
+    return render_template('index.html', my_list=my_list)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
