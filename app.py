@@ -28,10 +28,10 @@ def add_data():
         new_data = data['data']
 
         # Asynchronously ping the host
-        ping_result = asyncio.run(ping_host(host))
+        #ping_result = asyncio.run(ping_host(host))
 
-        my_list.append({"data": new_data, "ping_result": ping_result})
-        return jsonify({"message": "Data added successfully", "ping_result": ping_result})
+        my_list.append({"data": new_data})
+        jsonify({"message": "Data added successfully"})
     else:
         return jsonify({"error": "Invalid data format"}), 400
 
