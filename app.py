@@ -9,7 +9,7 @@ def index():
     # Render the HTML template
     return render_template('index.html', my_list=my_list)
 
-@app.route('/add_data', methods=['POST'])
+@app.route('/add', methods=['POST'])
 def add_data():
     new_data = request.form.get('data')
     my_list.append(new_data)
