@@ -21,7 +21,7 @@ async def ping_host(host):
 
 @app.route('/add_data', methods=['POST'])
 def add_data():
-    host = "dark-pink-indri-yoke.cyclic.app"  # Change this to the desired host
+    host = "google.com"  # Change this to the desired host
     data = request.get_json()  # Assuming you send JSON data in the request
 
     if 'data' in data:
