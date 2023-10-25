@@ -25,7 +25,7 @@ def add_data():
         # Asynchronously ping the host
         
 
-        my_list.append({"data": new_data})
+        #my_list.append({"data": new_data})
         return jsonify({"message": "Data added successfully"})
     else:
         return jsonify({"error": "Invalid data format"}), 400
