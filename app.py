@@ -1,16 +1,25 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 import os
 
 app = Flask(__name__)
 
-@app.route('/')
+my_list = []  # Initialize a list to store data
 
-def hello_world():
-    # Create an example list
-    my_list = ["String 1", "String 2", "String 3"]
+@app.route('/add_data', methods=['POST'])
+def add_data():
+    data = request.get_json()  # Assuming you send JSON data in the request
 
-    # Return the list as a JSON response
-    return render_template('index.html', my_list=my_list)
+    if 'data' in data:
+        new_data = data['data']
+        my_list.append(new_data)
+        return jsonify({"message": "Data added successfully"})
+    else:
+        return jsonify({"error": "Invalid data format"}), 400 
+    
+
+@app.route('/get_data', methods=['GET'])
+def get_data():
+    return jsonify({"data": my_list})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
